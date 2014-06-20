@@ -1,0 +1,34 @@
+--- /usr/lib/python2.6/site-packages/openstack_auth/views.py	2014-05-27 13:29:13.999522130 +0200
++++ /usr/lib/python2.6/site-packages/openstack_auth/views-orig.py	2014-05-27 13:27:25.978858557 +0200
+@@ -86,7 +86,6 @@
+ 
+ def delete_all_tokens(token_list):
+     insecure = getattr(settings, 'OPENSTACK_SSL_NO_VERIFY', False)
+-    cacert = getattr(settings, 'OPENSTACK_SSL_CACERT', None)
+     for token_tuple in token_list:
+         try:
+             endpoint = token_tuple[0]
+@@ -95,7 +94,6 @@
+                 client = keystone_client_v2.Client(endpoint=endpoint,
+                                                 token=token,
+                                                 insecure=insecure,
+-                                                cacert=cacert,
+                                                 debug=settings.DEBUG)
+                 client.tokens.delete(token=token)
+             else:
+@@ -112,7 +110,6 @@
+     LOG.debug('Switching to tenant %s for user "%s".'
+               % (tenant_id, request.user.username))
+     insecure = getattr(settings, 'OPENSTACK_SSL_NO_VERIFY', False)
+-    cacert = getattr(settings, 'OPENSTACK_SSL_CACERT', None)
+     endpoint = request.user.endpoint
+     try:
+         if get_keystone_version() >= 3:
+@@ -122,7 +119,6 @@
+                                               token=request.user.token.id,
+                                               auth_url=endpoint,
+                                               insecure=insecure,
+-                                              cacert=cacert,
+                                               debug=settings.DEBUG)
+         auth_ref = client.auth_ref
+         msg = 'Project switch successful for user "%(username)s".' % \

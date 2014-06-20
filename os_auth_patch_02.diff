@@ -1,0 +1,26 @@
+--- /usr/lib/python2.6/site-packages/openstack_auth/backend.py	2014-05-27 13:31:23.494121382 +0200
++++ /usr/lib/python2.6/site-packages/openstack_auth/backend-orig.py	2014-05-27 13:27:47.623791001 +0200
+@@ -60,7 +60,6 @@
+         LOG.debug('Beginning user authentication for user "%s".' % username)
+ 
+         insecure = getattr(settings, 'OPENSTACK_SSL_NO_VERIFY', False)
+-        cacert = getattr(settings, 'OPENSTACK_SSL_CACERT', None)
+ 
+         keystone_client = get_keystone_client()
+         try:
+@@ -70,7 +69,6 @@
+                 password=password,
+                 auth_url=auth_url,
+                 insecure=insecure,
+-                cacert=cacert,
+                 debug=settings.DEBUG)
+ 
+             unscoped_auth_ref = client.auth_ref
+@@ -121,7 +119,6 @@
+                         token=unscoped_auth_ref.auth_token,
+                         auth_url=auth_url,
+                         insecure=insecure,
+-                        cacert=cacert,
+                         debug=settings.DEBUG)
+                     auth_ref = client.auth_ref
+                     break

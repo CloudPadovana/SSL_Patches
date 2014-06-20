@@ -1,0 +1,19 @@
+--- /usr/lib/python2.6/site-packages/openstack_auth/user.py	2014-05-27 13:32:48.271860534 +0200
++++ /usr/lib/python2.6/site-packages/openstack_auth/user-orig.py	2014-05-27 13:28:02.934743233 +0200
+@@ -210,7 +210,6 @@
+     def authorized_tenants(self):
+         """ Returns a memoized list of tenants this user may access. """
+         insecure = getattr(settings, 'OPENSTACK_SSL_NO_VERIFY', False)
+-        cacert = getattr(settings, 'OPENSTACK_SSL_CACERT', None)
+ 
+         if self.is_authenticated() and self._authorized_tenants is None:
+             endpoint = self.endpoint
+@@ -221,7 +220,6 @@
+                     auth_url=endpoint,
+                     token=token.id,
+                     insecure=insecure,
+-                    cacert=cacert,
+                     debug=settings.DEBUG)
+             except (keystone_exceptions.ClientException,
+                     keystone_exceptions.AuthorizationFailure):
+
