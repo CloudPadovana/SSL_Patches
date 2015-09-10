@@ -100,9 +100,9 @@ core_opts = [
                default='http://localhost:5000/v2.0',
                help=_('Authorization URL for connecting to nova in admin '
                       'context')),
-    cfg.StrOpt('nova_ca_certificates_file',
-               default=None,
-               help=_('CA file for novaclient to verify server certificates')),
+    cfg.StrOpt('nova_ca_certificates_file',                                 
+                default=None,                                                
+                help=_('CA file for novaclient to verify server certificates')),
     cfg.StrOpt('nova_region_name',
                help=_('Name of nova region to use. Useful if keystone manages'
                       ' more than one region.')),
